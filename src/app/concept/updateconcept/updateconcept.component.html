@@ -1,0 +1,169 @@
+<div class="new-concept-form">
+    <form [formGroup]="updateConceptForm">
+        <div>
+            <mat-form-field appearance="fill" class="width-48 padding-r-4">
+                <mat-label>Subject</mat-label>
+                <input type="text" placeholder="Select subject" aria-label="Subject" matInput formControlName="subject"
+                    [matAutocomplete]="autosubject" required>
+                <mat-autocomplete #autosubject="matAutocomplete" [displayWith]="displaySubjectName">
+                    <mat-option *ngFor="let subject of subjects" [value]="subject">
+                        {{subject.subject_name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width-48">
+                <mat-label>Part</mat-label>
+                <input type="text" placeholder="Select part" aria-label="Part" matInput formControlName="part"
+                    [matAutocomplete]="autopart" required>
+                <mat-autocomplete #autopart="matAutocomplete" [displayWith]="displayPartName">
+                    <mat-option *ngFor="let part of parts" [value]="part">
+                        {{part.part_name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width-48 padding-r-4">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Enter name of concept" formControlName="name" type="text" required />
+            </mat-form-field>
+       
+            <div class="width-48 symbol-holder">
+                <app-math-editor [mathModel]="mathEquation" [placeholder]="'Add symbol for concept'"
+                    [mathChange]="changeSymbol">
+                </app-math-editor>
+            </div>
+          
+
+            <mat-form-field appearance="fill" class="width-100 padding-r-4">
+                <mat-label>Meaning</mat-label>
+                <textarea matInput rows="5" placeholder="Enter meaning of the concept"
+                    formControlName="meaning"></textarea>
+            </mat-form-field>
+            
+        
+
+            <br>
+<div formArrayName="author_definitions"
+*ngFor="let item of updateConceptForm.get('author_definitions')['controls']; let i = index;" class="flex width-48"> 
+
+<div [formGroupName]="i" class="container">
+    <mat-form-field appearance="fill" class="width-100">
+        <mat-label>Author</mat-label>
+        <input matInput placeholder="Enter name of the author" formControlName="author" class="first_letter_Capital"  type="text" />
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill" class="width-100">
+        <mat-label>Definition</mat-label>
+        <textarea matInput rows="5" placeholder="Enter definition of the concept" class="first_letter_Capital" formControlName="definition"></textarea>
+    </mat-form-field>
+</div>
+
+<div>
+
+
+    <button mat-mini-fab  type="button" (click)="addItem()"  class="pointer" color="primary" >
+        <mat-icon>add</mat-icon>
+      </button>
+    <br>
+      <button type="button" mat-mini-fab *ngIf="i>0" (click)="remove(i)" color="warn" >
+        <mat-icon>delete</mat-icon>
+      </button>
+    
+    </div>
+</div>
+<div>
+
+</div>
+
+
+        </div>
+        <div style="height: 36px; margin-top: 35px;">
+            <button type="submit" mat-raised-button color="primary" class="pull-right" (click)="updateConcept()"
+                [disabled]="!updateConceptForm.valid">
+                Update concept
+            </button>
+        </div>
+    </form>
+    <mat-tab-group>
+        <mat-tab label="Functions">
+            <section class="empty-container">
+                <h5>You haven't defined any function inputs yet.</h5>
+                <p>
+                    <button mat-raised-button color="primary" (click)="openDialogNewFunction()">
+                        Define new function
+                    </button>
+                </p>
+            </section>
+            <section class="function-tiles-container display-none">
+                <mat-grid-list cols="5">
+                    <button style="float: right;" mat-raised-button color="primary" (click)="openDialogNewFunction()">
+                        Define new function
+                    </button>
+                    <mat-grid-tile *ngFor="let func of functions">
+                        
+                        <mat-card class="concept-card">
+                            <button mat-mini-fab class="bgGray" style="float: right;" (click)="deleteFunction(func)">
+                                <mat-icon>delete</mat-icon>
+                              </button>
+                            <mat-card-header>
+                                <h3 (click)="editDialogNewFunction(func,term)">Function: {{func.name}}</h3>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <h4>Terms </h4>
+                                <mat-chip-list aria-label="Terms selection">
+                                    <div  *ngFor="let term of func.terms">
+                                        <mat-chip color="accent" selected (click)="openDialogUpdateFunctionTerm(func,term)">
+                                            {{term.name}}   </mat-chip> 
+                                            <button mat-mini-fab class="bgGray" (click)="deleteTerms(term)" >
+                                                <mat-icon>delete</mat-icon>
+                                              </button>
+                                    </div>
+                                    
+                                      
+                                    <mat-chip color="primary" selected (click)="openDialogNewFunctionTerm(func)">+
+                                    </mat-chip>
+                                </mat-chip-list>
+                                <h4>Constraints</h4>
+                                <mat-chip-list aria-label="Constraints selection">
+                                    <div  *ngFor="let constraint of func.constraints">
+                                        <mat-chip color="accent" selected (click)="openDialogUpdateFunctionConstraint(func,constraint)">
+                                            {{constraint.name}}   </mat-chip> 
+                                            <button mat-mini-fab class="bgGray" (click)="deleteConstraints(constraint)" >
+                                                <mat-icon>delete</mat-icon>
+                                              </button>
+                                    </div>
+                                    <mat-chip color="primary" selected (click)="openDialogNewFunctionConstraint(func)">+</mat-chip>
+                                </mat-chip-list>
+                            </mat-card-content>
+                            
+                        </mat-card>
+                    </mat-grid-tile>
+                  
+                </mat-grid-list>
+
+                
+               
+            </section>
+        </mat-tab>
+        <mat-tab label="Tables">
+            <section class="empty-container">
+                <h5>You haven't defined any table inputs yet.</h5>
+                <p>
+                    <button mat-raised-button color="primary">
+                        Define new table
+                    </button>
+                </p>
+            </section>
+        </mat-tab>
+        <mat-tab label="Constants">
+            <section class="empty-container">
+                <h5>You haven't defined any constants yet.</h5>
+                <p>
+                    <button mat-raised-button color="primary">
+                        Define new constant
+                    </button>
+                </p>
+            </section>
+        </mat-tab>
+    </mat-tab-group>
+</div>

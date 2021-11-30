@@ -1,0 +1,189 @@
+<div mat-dialog-content>
+
+<div class="example-action-buttons">
+  <button mat-button (click)="accordion.openAll()">Expand All</button>
+  <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+</div>
+
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        step 1
+      </mat-panel-title>
+      <mat-panel-description>
+        Type your step details
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+  <mat-tab-group (selectedIndexChange)="onTabIndexChange($event)">
+    <mat-tab label="Evaluation Step">
+      <form class="mat-elevation-z4" [formGroup]="createEvalStepForm">
+        <mat-form-field appearance="fill" class="width-100">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+        
+          <app-math-editor [mathModel]="mathEquation" [placeholder]="'Description'"
+                    [mathChange]="changeDescription">
+                </app-math-editor>
+         
+                <app-math-editor [mathModel]="mathEquation" [placeholder]="'Entry Description'"
+                [mathChange]="changeEntryDesc">
+            </app-math-editor>
+
+
+            <app-math-editor [mathModel]="mathEquation" [placeholder]="'Exit Description'"
+            [mathChange]="changeExitDesc">
+        </app-math-editor>
+
+        <div class="switch-container">
+          <mat-slide-toggle>show in output</mat-slide-toggle>
+        </div>
+
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Drop down to add functions and terms and symbols from concepts</mat-label>
+            <input type="text" placeholder="select expression for evolution" aria-label="Evaluation Function" matInput
+              formControlName="evalFunction" [matAutocomplete]="autofunction" required>
+            <mat-autocomplete #autofunction="matAutocomplete" [displayWith]="displayFunctionName"
+              (optionSelected)="functionSelected()">
+              <mat-option *ngFor="let func of functions" [value]="func">
+                {{func.func_name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          
+           <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Evaluation Function</mat-label>
+            <input type="text" placeholder="Select evaluation function" aria-label="Evaluation Function" matInput
+              formControlName="evalFunction" [matAutocomplete]="autofunction" required>
+            <mat-autocomplete #autofunction="matAutocomplete" [displayWith]="displayFunctionName"
+              (optionSelected)="functionSelected()">
+              <mat-option *ngFor="let func of functions" [value]="func">
+                {{func.func_name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field> 
+         
+          <div style="display: flex;">
+            <div class="control-section" class="width-48 padding-r-4" style="overflow:hidden;">
+                <div class="col-lg-12">
+                <div class="control_wrapper">
+                    <ejs-treeview id="default" [fields]='field'></ejs-treeview>
+                </div>
+                </div>
+            </div>
+            <div class="control-section" class="width-48 padding-r-4" style="overflow:hidden;">
+                <div class="col-lg-12">
+                <div class="control_wrapper">
+                    <ejs-treeview id="default" [fields]='field'></ejs-treeview>
+                </div>
+                </div>
+            </div>
+            </div>
+      </form>
+    </mat-tab>
+
+    <mat-tab label="Conditional Step">
+      <form class="mat-elevation-z4" [formGroup]="createConditionStepForm">
+
+        <mat-form-field appearance="fill" class="width-100">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+        
+          <app-math-editor [mathModel]="mathEquation" [placeholder]="'Description'"
+                    [mathChange]="changeDescription">
+                </app-math-editor>
+         
+                <app-math-editor [mathModel]="mathEquation" [placeholder]="'Entry Description'"
+                [mathChange]="changeEntryDesc">
+            </app-math-editor>
+
+
+            <app-math-editor [mathModel]="mathEquation" [placeholder]="'Exit Description'"
+            [mathChange]="changeExitDesc">
+        </app-math-editor>
+
+        <div class="switch-container">
+          <mat-slide-toggle>show in output</mat-slide-toggle>
+        </div>
+        
+        <div>
+          <mat-card  style="background-color: #f7f8fc;">
+              <mat-card-header>
+                 Conditions
+              </mat-card-header>
+              <br>
+              <mat-card-content>
+                  <mat-chip-list>
+                      <mat-chip>
+                        C1
+                      </mat-chip>
+                      <mat-chip>
+                         C2
+                      </mat-chip>
+                      <mat-chip color="primary" selected (click) ="openDialogNewCondition()">+
+                      </mat-chip>
+                  </mat-chip-list>
+          
+              </mat-card-content>
+          </mat-card>    
+          </div>
+
+     
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Evaluation Function</mat-label>
+            <input type="text" placeholder="Select evaluation function" aria-label="Evaluation Function" matInput
+              formControlName="evalFunction" [matAutocomplete]="autofunction" required>
+            <mat-autocomplete #autofunction="matAutocomplete" [displayWith]="displayFunctionName"
+              (optionSelected)="functionConditionSelected()">
+              <mat-option *ngFor="let func of functions" [value]="func">
+                {{func.func_name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>LHS</mat-label>
+            <input matInput formControlName="lhs">
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>RHS</mat-label>
+            <input matInput formControlName="rhs">
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>True index step</mat-label>
+            <input matInput formControlName="trueIndex">
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>False index step</mat-label>
+            <input matInput formControlName="falseIndex">
+          </mat-form-field>
+          <div class="switch-container">
+            <mat-slide-toggle>Expose step</mat-slide-toggle>
+          </div>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Entry Description</mat-label>
+            <textarea matInput formControlName="entryDesc"></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Exit Description</mat-label>
+            <textarea matInput formControlName="exitDesc"></textarea>
+          </mat-form-field> 
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+
+<div mat-dialog-actions *ngIf="selectedTabIndex === 0">
+  <!-- <p>{{this.createEvalStepForm.value | json}}</p>-->
+  <button mat-button  cdkFocusInitial (click)="onNoClick()">No Thanks</button>
+  <button mat-raised-button color="primary" (click)="createEvalStep()">Define evaluation step</button>
+</div>
+<div mat-dialog-actions *ngIf="selectedTabIndex === 1">
+  <button mat-button cdkFocusInitial (click)="onNoClick()">No Thanks</button>
+  <button mat-raised-button color="primary" (click)="createConditionStep()">Define conditional step</button>
+</div>
+
+</mat-expansion-panel>
+</mat-accordion>
+</div>

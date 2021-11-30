@@ -1,0 +1,15 @@
+<div class="new-concept-form">
+    <!--  <form> -->
+
+    <h3>Solution form builder</h3>
+    <ckeditor [(ngModel)]="uiOutput.html_template" #myEditor></ckeditor>
+    <!--
+                <ckeditor [editor]="Editor" [data]="data"></ckeditor> -->
+    <div style="padding:35px 0">
+
+        <button mat-raised-button class="pull-right" color="primary" (click)="saveSolutionDefinition()">
+            Submit
+        </button>
+    </div>
+    <!-- </form> -->
+</div>

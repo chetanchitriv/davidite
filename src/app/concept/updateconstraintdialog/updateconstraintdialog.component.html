@@ -1,0 +1,48 @@
+
+<h1 mat-dialog-title> Update constraint of terms and functions</h1>
+<div mat-dialog-content>
+  <form [formGroup]="updateConstraintForm">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Enter constraint name" formControlName="name" type="text" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="Enter Description " formControlName="symbol" type="text" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>choose terms/function</mat-label>
+    <input type="text" placeholder="Pick one" aria-label="choose terms/function" matInput formControlName="choose terms/function"
+        [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <!-- <mat-option *ngFor="let option of options" [value]="option">
+            {{option}}
+        </mat-option> -->
+    </mat-autocomplete>
+</mat-form-field>
+<mat-form-field appearance="fill" class="full-width">
+  <mat-label>Write Error Message</mat-label>
+  <input matInput placeholder="Write Error Message" formControlName="comparator" type="text" required />
+</mat-form-field>
+<mat-form-field appearance="fill" class="full-width">
+<mat-label>Evalution Function*</mat-label>
+<input matInput placeholder="Evalution Function*" formControlName="value" type="text" required />
+</mat-form-field>
+<mat-form-field appearance="fill" class="full-width">
+  <mat-label>Map evaluation function arguments</mat-label>
+  <input type="text" placeholder="Pick one" aria-label="Map evaluation function arguments" matInput formControlName="Map evaluation function arguments"
+      [matAutocomplete]="auto">
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <!-- <mat-option *ngFor="let option of options" [value]="option">
+          {{option}}
+      </mat-option> -->
+  </mat-autocomplete>
+</mat-form-field>
+  
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" cdkFocusInitial>No Thanks</button>
+  <button mat-button (click)="updateConstraint()" [disabled]="!updateConstraintForm.valid">Add next step</button>
+  <button mat-button >Submit all steps</button>
+  </div>

@@ -1,0 +1,72 @@
+<form [formGroup]="signupForm">
+  <mat-form-field appearance="legacy" class="full-width">
+    <mat-label>Login ID</mat-label>
+    <input matInput placeholder="Enter your first name" formControlName="loginId" type="text" />
+  </mat-form-field>
+  <mat-form-field appearance="legacy" class="full-width">
+    <mat-label>First Name</mat-label>
+    <input
+      matInput
+      placeholder="Enter your first name"
+      formControlName="firstName"
+      type="text"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="legacy" class="full-width">
+    <mat-label>Last Name</mat-label>
+    <input
+      matInput
+      placeholder="Enter your first name"
+      formControlName="lastName"
+      type="text"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="legacy" class="full-width">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      placeholder="Enter your email"
+      formControlName="email"
+      type="email"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="legacy" class="full-width">
+    <mat-label>Phone Number</mat-label>
+    <span matPrefix>+91 &nbsp;</span>
+    <input
+      type="tel"
+      matInput
+      placeholder="555-555-1234"
+      formControlName="phone"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="legacy" class="full-width">
+    <mat-label>Address</mat-label>
+    <textarea
+      matInput
+      placeholder="Enter your address"
+      formControlName="address"
+    ></textarea>
+  </mat-form-field>
+  <mat-form-field appearance="legacy" class="full-width">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      placeholder="Enter your password"
+      formControlName="password"
+      required
+      type="password"
+    />
+  </mat-form-field>
+  <div class="btn-container">
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="!signupForm.valid"
+      (click)="signup()"
+    >
+      SIGNUP
+    </button>
+  </div>
+</form>

@@ -1,0 +1,8 @@
+<form [formGroup]="conceptForm" class="frm">
+    <div *ngFor="let definition of conceptsDefinitions" class="form-row">
+        <app-concept-form-control [definition]="definition" [form]="conceptForm"></app-concept-form-control>
+    </div>
+    <button mat-raised-button class="pull-right" color="primary">
+        Submit
+    </button>
+</form>

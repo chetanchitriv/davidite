@@ -1,0 +1,25 @@
+<div class="new-concept-form">
+    <form>
+
+        <h3>Define concept</h3>
+
+        <div class="ad-banner-example">
+            <ng-template appAdComponent></ng-template>
+        </div>
+
+        <div style="padding:35px 0">
+            <button mat-raised-button class="pull-left" color="primary" (click)="loadComponent()"
+                style="margin-right: 20px;">
+                Add input
+            </button>
+            <button mat-raised-button class="pull-left" color="primary" (click)="previewForm()"
+                *ngIf="formComponents.length >0">
+                Preview
+            </button>
+            <button mat-raised-button class="pull-right" color="primary" (click)="saveDefnition()"
+                *ngIf="formComponents.length >0">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

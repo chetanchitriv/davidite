@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.display-none {
+  display: none !important;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.width-48 {
+  width: 48%;
+}
+.width-24 {
+  width: 22%;
+}
+
+.padding-r-4 {
+  padding-right: 4%;
+}
+.padding-r-2 {
+  padding-right: 2%;
+}
+.padding-r-1 {
+  padding-right: 1%;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #f7f8fc;
+}
+.first_letter_Capital{
+  text-transform: capitalize;
+}
+
+.pointer{
+  cursor: pointer;
+}
+.width-100{
+  width: 100%;
+}
+.flex{
+  display: flex;
+}
+.bgGray{
+background-color: gray !important;
+}

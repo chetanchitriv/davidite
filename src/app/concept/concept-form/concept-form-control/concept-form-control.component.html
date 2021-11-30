@@ -1,0 +1,20 @@
+<div [formGroup]="form">
+    <div [ngSwitch]="definition.type">
+        <mat-form-field appearance="fill" class="full-width padding-r-4" *ngSwitchCase="'Text'">
+            <mat-label>{{definition.label}}</mat-label>
+            <input matInput placeholder="Enter {{definition.label}} value" [formControlName]="definition.key" [type]="definition.type" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width padding-r-4" *ngSwitchCase="'List'" >
+            <mat-label>{{definition.label}}</mat-label>
+            <mat-select [formControlName]="definition.key">
+                <mat-option *ngFor="let opt of definition.options" [value]="opt.value">
+                    {{opt.label}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+
+    <!-- <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div> -->
+</div>

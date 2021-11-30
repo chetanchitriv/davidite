@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Update new function</h1>
+<div mat-dialog-content>
+    <form [formGroup]="createFunctionForm">
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Function Name</mat-label>
+            <input matInput placeholder="Enter function name" formControlName="name" type="text" required />
+        </mat-form-field>
+        <!-- <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Type</mat-label>
+            <input matInput placeholder="Enter function type" formControlName="ftype" type="text" required />
+        </mat-form-field>
+ -->
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="ftype">
+              <mat-option *ngFor="let f of fuctionType" [value]="f">
+                {{f}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" cdkFocusInitial>No Thanks</button>
+    <button mat-button (click)="updateFunction()" [disabled]="!createFunctionForm.valid">Update function</button>
+</div>

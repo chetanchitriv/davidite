@@ -1,0 +1,126 @@
+<h1 mat-dialog-title>Adding new term & constraint to function</h1>
+<div mat-dialog-content>
+    <form [formGroup]="createTermForm">
+        <div style="display: flex;">
+            <mat-form-field appearance="fill" class="width-48 padding-r-4">
+                <mat-label>Term Name</mat-label>
+                <input matInput placeholder="Enter term name" formControlName="name" type="text" required />
+            </mat-form-field>
+            <div class="width-48 symbol-holder">
+                <app-math-editor [mathModel]="mathEquation" [placeholder]="'Add symbol for concept'"
+                    [mathChange]="changeSymbol">
+                </app-math-editor>
+            </div>
+        </div>
+        <mat-form-field appearance="fill" class="width-48 padding-r-4">
+        <mat-label>Definition</mat-label>
+        <input matInput placeholder="Enter definition" formControlName="definition" type="text" />
+        </mat-form-field>
+       
+        <mat-radio-group aria-label="Select side">
+          <mat-radio-button  *ngFor="let option of options" [value]="option" formControlName="location">
+            {{option}}
+          </mat-radio-button>
+        </mat-radio-group>
+        
+        <section  formArrayName="symbolConstraints" >
+       
+            <div style="border: 1px solid gray;" *ngFor="let constraint of symbolConstraints().controls; let i = index;" >
+                <h4>Add  Variable</h4>
+                <div [formGroupName]="i">
+                <mat-form-field appearance="fill" class="width-30 padding-r-5">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Enter name constraint" formControlName="name" type="text" [(ngModel)]="name"/>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="width-30 padding-r-5">
+                    <mat-label>Symbol</mat-label>
+                    <input matInput placeholder="Enter symbol constraint" formControlName="symbol" type="text" [(ngModel)]="symbol"/>
+            
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="width-30 padding-r-5">
+                    <mat-label>Definition</mat-label>
+                    <input matInput placeholder="Enter definition" formControlName="definition" type="text" />
+                </mat-form-field>
+                <mat-radio-group
+                aria-label="Select value type">
+                  <mat-radio-button  *ngFor="let type of variabletypes" [value]="type" formControlName="value_type">
+                    {{type}}
+                  </mat-radio-button>
+                </mat-radio-group>
+
+                <section  formArrayName="subSymbolConstraints">
+                   
+                <div style="border: 1px solid gray;" *ngFor="let subconstraint of constraint.controls.subSymbolConstraints.controls; let idx = index;">
+                    <div [formGroupName]="idx">
+                    <h4>Add Constraint</h4>
+                    <mat-form-field appearance="fill" class="width-30 padding-r-5">
+                        <mat-label>Operator</mat-label>
+                        <input type="text" placeholder="Pick one" aria-label="Operators" matInput formControlName="comparator"
+                            [matAutocomplete]="autoOperator">
+                        <mat-autocomplete autoActiveFirstOption #autoOperator="matAutocomplete">
+                            <mat-option *ngFor="let operator of subsymbolOperators" [value]="operator">
+                                {{operator}}
+                            </mat-option>
+                        </mat-autocomplete>
+                       
+                    </mat-form-field>
+                
+                <mat-form-field appearance="fill" class="width-30 padding-r-5">
+                <mat-label>Type</mat-label>
+                <mat-radio-group
+                    aria-label="Select value type1">
+                  <mat-radio-button  *ngFor="let type of constrainttypes" [value]="type" formControlName="value_type">
+                    {{type}} 
+                  </mat-radio-button>&nbsp;&nbsp;
+                </mat-radio-group>
+            </mat-form-field>
+                <mat-form-field appearance="fill" class="width-30 padding-r-5">
+                    <mat-label>Value</mat-label>
+                    <input matInput placeholder="Enter value constraint" formControlName="value" type="text" [(ngModel)]="value"/>
+                </mat-form-field> 
+
+                </div>  
+                </div>
+            <p style="height: 38px; margin-top: -55px; margin-right: 200px;">
+            <button mat-stroked-button color="primary" class="pull-right" (click)="addsubSymbolConstraints(i)" >+Add Constraint</button>
+            </p>  
+     </section>
+    </div>
+          </div> 
+     <!-- <p style="height: 38px;">
+    <button style="padding: 3%;" mat-stroked-button color="primary" class="pull-right" (click)="addSymbolConstraint()">+Add variables </button>
+    </p> -->
+    <br>
+    <div>
+    <mat-card  style="background-color: #f7f8fc;">
+        <mat-card-header>
+            Variables
+        </mat-card-header>
+        <br>
+        <mat-card-content>
+            <mat-chip-list>
+                <mat-chip>
+                    X
+                </mat-chip>
+                <mat-chip>
+                   Y
+                </mat-chip>
+                <mat-chip color="primary" selected (click) ="openDialogNewVariableTerm()">+
+                </mat-chip>
+            </mat-chip-list>
+    
+        </mat-card-content>
+    </mat-card>    
+    </div>
+ </section>
+        
+    </form>
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" cdkFocusInitial>No Thanks</button>
+    <button mat-button (click)="createTerm()" [disabled]="!createTermForm.valid">Define new term</button>
+    <!-- <p>{{this.createTermForm.value.symbolConstraints | json}}</p>
+    <p>{{this.createTermForm.value.coefficientConstraints | json}}</p> -->
+</div>
+

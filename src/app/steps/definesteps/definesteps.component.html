@@ -1,0 +1,94 @@
+<section class="empty-container" *ngIf="!(stepSuitDetails && stepSuitDetails.steps)">
+    <h5>You haven't defined your solution yet.</h5>
+    <p>
+        <button mat-raised-button color="primary" (click)="createStepSuiteAndAddNewStep()">Define new solution</button>
+    </p>
+</section>
+<section *ngIf="stepSuitDetails && stepSuitDetails.steps">
+ 
+   <!--  <mat-accordion class="steps-container">
+        <mat-expansion-panel *ngFor="let step of stepSuitDetails?.steps | keyvalue">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{step.key}}. {{step.value.step_name}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{step.value.step_desc}}
+                </mat-panel-description>
+                
+            </mat-expansion-panel-header>
+            <section *ngIf="step.value.step_type === 'E'">
+                <mat-form-field appearance="fill" class="width-48 padding-r-2">
+                    <mat-label>Type</mat-label>
+                    <input matInput disabled value="Evaluation">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="width-48">
+                    <mat-label>Name</mat-label>
+                    <input matInput disabled value="{{step.value.step_name}}">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput disabled value="{{step.value.step_desc}}"></textarea>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="width-48 padding-r-2">
+                    <mat-label>Entry Description</mat-label>
+                    <textarea matInput disabled value="{{step.value.step_entry_desc}}"></textarea>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="width-48">
+                    <mat-label>Exit Description</mat-label>
+                    <textarea matInput disabled value="{{step.value.step_exit_desc}}"></textarea>
+                </mat-form-field>
+                <mat-card-actions>
+                     <button mat-stroked-button class="pull-right" color="primary"
+                        (click)="updateConcept(concept.concept_id)">Edit</button> 
+                    <button type="button" mat-mini-fab  (click)="delete(concept.concept_id)" color="warn" >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </section>
+            <section *ngIf="step.value.step_type === 'C'">
+                <mat-form-field appearance="fill" class="width-48 padding-r-2">
+                    <mat-label>Type</mat-label>
+                    <input matInput disabled value="Evaluation">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="width-48">
+                    <mat-label>Name</mat-label>
+                    <input matInput disabled value="{{step.value.step_name}}">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput disabled value="{{step.value.step_desc}}"></textarea>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="width-48 padding-r-2">
+                    <mat-label>Entry Description</mat-label>
+                    <textarea matInput disabled value="{{step.value.step_entry_desc}}"></textarea>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="width-48">
+                    <mat-label>Exit Description</mat-label>
+                    <textarea matInput disabled value="{{step.value.step_exit_desc}}"></textarea>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="width-48 padding-r-2">
+                    <mat-label>LHS</mat-label>
+                    <input matInput disabled value="{{step.value.step_func_args.lval}}">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="width-48">
+                    <mat-label>RHS</mat-label>
+                    <input matInput disabled value="{{step.value.step_func_args.rval}}">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="width-48 padding-r-2">
+                    <mat-label>True Index</mat-label>
+                    <input matInput disabled value="{{step.value.route_true_index}}">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="width-48">
+                    <mat-label>False Index</mat-label>
+                    <input matInput disabled value="{{step.value.route_false_index}}">
+                </mat-form-field>
+            </section>
+        </mat-expansion-panel>
+    </mat-accordion>-->
+     <p>
+        <button mat-raised-button color="primary" (click)="openDialogNewSteps()">
+            Add new step
+        </button>
+    </p>
+</section>  

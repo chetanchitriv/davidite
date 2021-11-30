@@ -1,0 +1,23 @@
+<div>
+    <form [formGroup]="listItemForm" class="frm">
+        <mat-form-field appearance="fill" class="width-22 padding-r-1">
+            <mat-label>Label</mat-label>
+            <input type="text" placeholder="Enter Label" aria-label="Label" matInput required formControlName="label">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-22 padding-r-2">
+            <mat-label>Value</mat-label>
+            <input type="text" placeholder="Enter Label" aria-label="Label" matInput required formControlName="value">
+        </mat-form-field>
+       <!--  <button
+            mat-mini-fab color="primary"
+            aria-label="icon button with a menu icon "
+            class="add-btn"
+            (click)="addItem()"
+        >
+            <mat-icon>check</mat-icon>
+        </button> -->
+        <button mat-mini-fab color="warn" aria-label="Example icon button with a menu icon" class="add-btn" (click)="removeComponent()">
+            <mat-icon>remove</mat-icon>
+        </button>
+    </form>
+</div>

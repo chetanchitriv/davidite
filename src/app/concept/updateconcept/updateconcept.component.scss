@@ -1,0 +1,33 @@
+.empty-container {
+  padding: 15px 0;
+  h5 {
+    font-size: 12px;
+    font-weight: 500;
+  }
+}
+
+.function-tiles-container {
+  padding: 10px 0;
+}
+
+.concept-card {
+  width: 250px;
+  margin-right: 10px;
+  min-height: 180px;
+  background-color: #f7f8fc;
+  &.empty-tile {
+    width: 250px;
+    text-align: center;
+    cursor: pointer;
+
+    button {
+      margin-top: 65px;
+    }
+  }
+}
+
+.symbol-holder{
+    display: inline-block;
+    position: relative;
+    top: -17px;
+}

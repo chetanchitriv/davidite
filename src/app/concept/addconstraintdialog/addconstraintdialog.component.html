@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>Add variables</h1>
+<div mat-dialog-content>
+    <form [formGroup]="addConstraintform">
+      
+        <mat-radio-group aria-label="Select side" >
+            <mat-label class="width-30 padding-r-4">Type:</mat-label>
+          <mat-radio-button class="width-30 padding-r-4" *ngFor="let option of constrainttypes" [value]="option" formControlName="">
+            {{option}}
+          </mat-radio-button>
+        </mat-radio-group>
+    <br><br>
+        <div style="display: flex;">
+            <mat-label class="width-30 padding-r-5" >variable 1</mat-label>
+            <mat-form-field appearance="fill" class="width-30 padding-r-4">
+                <mat-label>Operator</mat-label>
+                <input type="text" placeholder="Pick one" aria-label="Operators" matInput formControlName="comparator"
+                    [matAutocomplete]="autoOperator">
+                <mat-autocomplete autoActiveFirstOption #autoOperator="matAutocomplete">
+                    <mat-option *ngFor="let operator of subsymbolOperators" [value]="operator">
+                        {{operator}}
+                    </mat-option>
+                </mat-autocomplete>
+               
+            </mat-form-field>
+       
+            <mat-form-field appearance="fill" class="width-30 padding-r-4">
+                <mat-label>Value</mat-label>
+                <input matInput placeholder="Enter Value" formControlName="" type="text" />
+             </mat-form-field>
+        </div>
+
+        
+       
+       
+       
+       
+   </form>
+   </div>
+    
+        
+<div mat-dialog-actions>
+    <button mat-button  cdkFocusInitial (click)="onNoClick()">No Thanks</button>
+    <button mat-button  >Define new term</button>
+    <!-- <p>{{this.createTermForm.value.symbolConstraints | json}}</p>
+    <p>{{this.createTermForm.value.coefficientConstraints | json}}</p> -->
+</div>
+
+<!-- (click)="createVariable()" -->
+<!-- (click)="onNoClick()" -->
+<!-- [disabled]="!createTermForm.valid" -->

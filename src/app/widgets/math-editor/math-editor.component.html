@@ -1,0 +1,47 @@
+<div class="eq-edtr">
+
+    <mat-card class="symb-holder sm-window" *ngIf="isShowSymbols"  [class]="inputHolderPosition">
+
+        <mat-tab-group mat-align-tabs="sym" class="eq-edtr-tabs"  (click)="onTabChange($event)">
+            <mat-tab *ngFor="let symbolGroup of symbols" label="{{symbolGroup.title}}" class="symb-tab">
+                <ul class="symb-sub-list" *ngIf="symbolGroup.title == 'Basic'">
+                    <li (click) ="showButtons($event, 'math')"[class]="{'active' : activeBasicTab == 'math'}">Math</li>
+                    <li (click) ="showButtons($event, 'abc')" [class]="{'active' : activeBasicTab == 'abc'}">&#945; &#946; &#947;</li>
+                    <li (click) ="showButtons($event, 'trig')" [class]="{'active' : activeBasicTab == 'trig'}">Trig</li>
+                </ul>`
+                <ul class="symb-list" [class]="{'sub-list-det':symbolGroup.title == 'Basic'}">
+                    <li *ngFor="let  rule of symbolGroup.items">
+                        <button
+                            *ngIf="rule.type == 'btn' && ((activeBasicTab && rule.category == activeBasicTab) || !activeBasicTab)"
+                            mat-stroked-button
+                            class="symb-btn"
+                            (click)="onClickMathButton($event, rule)"
+                        >
+                            <span *ngIf="rule.symbol" [innerHTML]="rule.symbol" [class]="rule.fontsize"></span>
+                            <sup *ngIf="rule.sup"class="eq-sup"  [innerHTML]="rule.sup"></sup>
+                            <sub *ngIf="rule.sub" class="eq-sub" [innerHTML]="rule.sub"></sub>
+                        </button>
+                    </li>
+                </ul>
+            </mat-tab>
+        </mat-tab-group>
+
+        <!-- <div class="pointer"></div> -->
+    </mat-card>
+
+    <mat-card class="eq-codepad" (click)="onClickEditor()">
+        <span class="eq-edtr-eq-placeholder" *ngIf="showPlaceholder">{{placeholder}}</span>
+        <span class="material-icons add-icon"> add</span>
+
+        <div class="eq-codepad-wrapper">
+            <div #mathquillField></div>
+            <span tabindex=0 #mathquillSubstituteField></span>
+        </div>
+        <div class="wrapper" [hidden]="true">
+            Rendered Latex:
+            <div #mathquillLatexField></div>
+        </div>
+    </mat-card>
+
+
+</div>

@@ -1,0 +1,65 @@
+<mat-sidenav-container class="page-container">
+    <mat-sidenav mode="side" opened class="side-nav">
+        <app-menu></app-menu>
+    </mat-sidenav>
+    <mat-sidenav-content class="main-content">
+        <p>
+            <mat-form-field appearance="fill" class="search-bar">
+                <mat-label>Search</mat-label>
+                <input matInput placeholder="Search" #keyword (keyup)="showConcepts(keyword.value)">
+                <mat-icon class="pointer" matPrefix>search</mat-icon>
+                <mat-icon class="pointer" matSuffix (click)="keyword.value = '';showConcepts()">clear</mat-icon>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="addConcept()" class="floatmargin">+ Define new concept</button>
+
+        </p>
+        <p style="height: 100px;padding-top: 12px;">
+            <mat-card class="header-card">
+                <mat-form-field class="full-width">
+                    <input type="text" placeholder="Subject" aria-label="Subject" matInput [formControl]="subjectsControl"
+                        [matAutocomplete]="autosubject">
+                    <mat-autocomplete #autosubject="matAutocomplete" [displayWith]="displaySubjectName" (optionSelected)='updateSubject($event.option.value)'>
+                        <mat-option *ngFor="let subject of subjects" [value]="subject">
+                            {{subject.subject_name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </mat-card>
+            <mat-card class="header-card">
+                <mat-form-field class="full-width">
+                    <input type="text" placeholder="Part" aria-label="Part" matInput [formControl]="partsControl"
+                        [matAutocomplete]="autopart">
+                    <mat-autocomplete #autopart="matAutocomplete" [displayWith]="displayPartName" (optionSelected)='updatePart($event.option.value)'>
+                        <mat-option *ngFor="let part of parts" [value]="part">
+                            {{part.part_name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </mat-card>
+        </p>
+        <section class="empty-concepts" *ngIf="!concepts.length">
+            <h2 *ngIf="!keyword">You don't have created any concepts yet.</h2>
+            <h2 *ngIf="keyword">No Record Found.</h2>
+
+        </section>
+        <section *ngIf="concepts.length">
+            <mat-grid-list cols="5" rowHeight="150px">
+                <mat-grid-tile
+                *ngFor="let concept of concepts">
+                    <mat-card>
+                        <h4>Concept: {{concept.name}}</h4>
+                        <small>Author: {{concept.author}}</small>
+                        <mat-card-actions>
+                            <button mat-stroked-button class="pull-right" color="primary"
+                                (click)="updateConcept(concept.concept_id)">Edit</button>
+                            <button type="button" mat-mini-fab  (click)="deleteConcept(concept.concept_id)" color="warn" >
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card>
+                </mat-grid-tile>
+                
+            </mat-grid-list>
+        </section>
+    </mat-sidenav-content>
+</mat-sidenav-container>

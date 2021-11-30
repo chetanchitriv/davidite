@@ -1,0 +1,18 @@
+.menu-container {
+  padding-top: 120px;
+}
+
+.mat-card {
+  padding-left: 40px;
+  .mat-icon {
+    float: left;
+    margin-right: 10px;
+  }
+  span {
+    display: inline-block;
+    margin-top: 3px;
+  }
+  &.selected {
+    background-color: #f7f8fc;
+  }
+}

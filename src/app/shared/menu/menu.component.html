@@ -1,0 +1,39 @@
+<div class="menu-container">
+    <mat-card (click)="navigate('/home')"  routerLink="/home" routerLinkActive="active">
+        <div>
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </div>
+    </mat-card>
+    <mat-card  (click)="navigate('/404')" routerLink="/404" routerLinkActive="active">
+        <div>
+            <mat-icon>work_outline</mat-icon>
+            <span>Work</span>
+        </div>
+    </mat-card>
+    <mat-card (click)="navigate('/404')"  routerLink="/404" routerLinkActive="active">
+        <div>
+            <mat-icon>email</mat-icon>
+            <span>Messages</span>
+        </div>
+    </mat-card>
+    <mat-card (click)="navigate('/404')"  routerLink="/404" routerLinkActive="active">
+        <div>
+            <mat-icon>groups</mat-icon>
+            <span>Team</span>
+        </div>
+    </mat-card>
+    <mat-card  (click)="navigate('/404')"  routerLink="/404" routerLinkActive="active">
+        <div>
+            <mat-icon>account_circle</mat-icon>
+            <span>Your Profile</span>
+        </div>
+    </mat-card>
+
+    <mat-card  (click)="navigate('/dashboard')"   routerLink="/dashboard" routerLinkActive="active">
+        <div>
+            <mat-icon>dashboard_customize</mat-icon>
+            <span>Dashboard</span>
+        </div>
+    </mat-card>
+</div>

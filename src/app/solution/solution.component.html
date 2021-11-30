@@ -1,0 +1,38 @@
+<div class="container">
+
+  <h1>Angular FormArray Example - ItSolutionStuff.com</h1>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+    </p>
+
+    <table class="table table-bordered" formArrayName="quantities">
+      <tr>
+        <th colspan="2">Add Multiple Quantity:</th>
+        <th width="150px"><button type="button" (click)="addQuantity()" class="btn btn-primary">Add More</button></th>
+      </tr>
+      <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Quantity</mat-label>
+            <input matInput formControlName="qty">
+          </mat-form-field>
+        </td>
+        <td>
+          <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+        </td>
+      </tr>
+    </table>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+
+  </form>
+
+  <br />
+  {{this.productForm.value | json}}
+</div>

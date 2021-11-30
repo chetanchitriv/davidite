@@ -1,0 +1,38 @@
+.width-100 {
+  width: 100%;
+}
+
+.accordian-container {
+  padding: 0 3px 5px 3px;
+}
+
+.switch-container {
+  padding: 0 0 15px 10px;
+}
+
+
+.example-action-buttons {
+  padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+
+.control_wrapper {
+  max-width: 300px;
+  margin: auto;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+}

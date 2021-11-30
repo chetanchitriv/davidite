@@ -1,0 +1,41 @@
+
+<form [formGroup]="conceptDefineForm" class="frm">
+    <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" class="frm-close">
+        <!-- <mat-icon style="color:#f44336">cancel</mat-icon> -->
+    </button>
+    <div class="frm-row">
+        <div class="frm-col count">
+            <div>
+                <span>{{data.count}}</span>
+            </div>
+        </div>
+        <div class="frm-col content">
+            <mat-form-field appearance="fill" class="width-22 padding-r-1">
+                <mat-label>Label</mat-label>
+                <input type="text" placeholder="Enter Label" aria-label="Label" matInput formControlName="controlName" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width-22 padding-r-2">
+                <mat-label>Type</mat-label>
+                <mat-select (selectionChange) ="onTypeChange($event.value)"  formControlName="controlType">
+                    <mat-option *ngFor="let inputType of inputTypes" [value]="inputType.value">
+                        {{inputType.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button
+                mat-mini-fab
+                aria-label="Example icon button with a menu icon"
+                class="add-item"
+                (click)="loadComponent()"
+                *ngIf="conceptDefineForm.controls.controlType.value == 'List'"
+            >
+                <mat-icon>add</mat-icon>
+            </button>
+
+            <!-- <h3 class="list-header" *ngIf="conceptDefineForm.controls.controlType.value == 'List'">List Items</h3> -->
+
+            <ng-template #viewContainerRef></ng-template>
+        </div>
+    </div>
+
+</form>

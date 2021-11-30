@@ -1,0 +1,102 @@
+<mat-sidenav-container class="page-container">
+    <mat-sidenav mode="side" opened class="side-nav">
+        <app-menu></app-menu>
+    </mat-sidenav>
+    <mat-sidenav-content class="main-content">
+        <p>
+            <mat-form-field appearance="fill" class="search-bar">
+                <mat-label>Search</mat-label>
+                <input matInput placeholder="Search">
+                <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+        </p>
+        <div *ngIf="createConceptForm" class="new-concept-form">
+            <form [formGroup]="createConceptForm">
+                <h3>Create new concept</h3>
+                <div>
+                    <mat-form-field appearance="fill" class="width-48 padding-r-4">
+                        <mat-label>Subject</mat-label>
+                        <input type="text" placeholder="Select subject" aria-label="Subject" matInput formControlName="subject"
+                            [matAutocomplete]="autosubject" required>
+                        <mat-autocomplete #autosubject="matAutocomplete" [displayWith]="displaySubjectName">
+                            <mat-option *ngFor="let subject of subjects" [value]="subject">
+                                {{subject.subject_name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="width-48">
+                        <mat-label>Part</mat-label>
+                        <input type="text" placeholder="Select part" aria-label="Part" matInput formControlName="part"
+                            [matAutocomplete]="autopart" required>
+                        <mat-autocomplete #autopart="matAutocomplete" [displayWith]="displayPartName">
+                            <mat-option *ngFor="let part of parts" [value]="part">
+                                {{part.part_name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill" class="width-48 padding-r-4">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Enter name of concept" class="first_letter_Capital" formControlName="name" type="text" required />
+                    </mat-form-field>
+                    <!-- <mat-form-field appearance="fill" class="width-48">
+                        <mat-label>Symbol</mat-label>
+                        <input matInput placeholder="Add symbol for concept" formControlName="symbol" type="text" required />
+                    </mat-form-field> -->
+                    <div class="width-48 symbol-holder">
+                        <app-math-editor
+                            [mathModel] = "mathEquation"
+                            [placeholder] = "'Add symbol for concept'"
+                            [mathChange] = "changeSymbol"
+                        ></app-math-editor>
+                    </div>
+                    <!-- <mat-form-field appearance="fill" class="width-48 padding-r-4">
+                        <mat-label>Optional symbol</mat-label>
+                        <input matInput placeholder="Add optional symbol for concept" formControlName="optionalSymbol" type="text" />
+                    </mat-form-field> -->
+
+                    <mat-form-field appearance="fill" class="width-100">
+                        <mat-label>Meaning</mat-label>
+                        <textarea matInput rows="5" placeholder="Enter meaning of the concept" class="first_letter_Capital" formControlName="meaning"></textarea>
+                    </mat-form-field>
+<br>
+<div formArrayName="author_definitions"
+*ngFor="let item of createConceptForm.get('author_definitions')['controls']; let i = index;" class="flex"> 
+
+<div [formGroupName]="i" class="container">
+    <mat-form-field appearance="fill" class="width-100">
+        <mat-label>Author</mat-label>
+        <input matInput placeholder="Enter name of the author" formControlName="author" class="first_letter_Capital"  type="text" />
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="width-100">
+        <mat-label>Definition</mat-label>
+        <textarea matInput rows="5" placeholder="Enter definition of the concept" class="first_letter_Capital" formControlName="definition"></textarea>
+    </mat-form-field>
+</div>
+
+<div>
+
+
+<button mat-mini-fab  (click)="addItem()"  class="pointer" color="primary" >
+    <mat-icon>add</mat-icon>
+  </button>
+<br>
+  <button mat-mini-fab *ngIf="i>0" (click)="remove(i)" color="warn" >
+    <mat-icon>delete</mat-icon>
+  </button>
+
+</div>        </div>
+
+
+                </div>
+                <div style="padding: 35px 0;">
+                    <button mat-raised-button color="primary" class="pull-right" (click)="createConcept()" [disabled]="!createConceptForm.valid">
+                        Define concept
+                    </button>
+                </div>
+            </form>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

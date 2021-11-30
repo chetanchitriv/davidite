@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>Update variables</h1>
+<div mat-dialog-content>
+    <form  [formGroup]="Updatevariableform">
+        <div style="display: flex;">
+            <mat-form-field appearance="fill" class="width-48 padding-r-4">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Enter name" formControlName="" type="text" required />
+            </mat-form-field>
+            <div class="width-48 symbol-holder">
+                <app-math-editor 
+                [mathModel]="mathEquation" [placeholder]="'Add symbol for concept'"
+                    [mathChange]="changeSymbol">
+                </app-math-editor>
+            </div>
+        </div>
+        <mat-form-field appearance="fill" class="width-48 padding-r-4">
+        <mat-label>Definition</mat-label>
+        <input matInput placeholder="Enter definition" formControlName="" type="text" />
+        </mat-form-field>
+       
+        <mat-radio-group aria-label="Select side" >
+          <mat-radio-button class="width-30 padding-r-4" *ngFor="let option of variabletypes" [value]="option" formControlName="">
+            {{option}}
+          </mat-radio-button>
+        </mat-radio-group>
+        <br>
+        <div>
+        <mat-card  style="background-color: #f7f8fc;">
+            <mat-card-header>
+                Constraints
+            </mat-card-header>
+            <br>
+            <mat-card-content>
+                <mat-chip-list>
+                    <div  *ngFor="let constraint of constraints">
+                        <mat-chip color="accent" selected (click)="openDialogUpdateConstraints(constraint)">
+                            {{constraint}}   </mat-chip> 
+                            <!-- <button mat-mini-fab class="bgGray" (click)="deleteTerms(term)" >
+                                <mat-icon>delete</mat-icon>
+                              </button> -->
+                    </div>
+                  
+                    <mat-chip color="primary" selected (click)="openDialogNewConstraintTerm()">+
+                    </mat-chip>
+                </mat-chip-list>
+        
+            </mat-card-content>
+        </mat-card>    
+   </div>
+   </form>
+   </div>
+    
+        
+<div mat-dialog-actions>
+    <button mat-button  cdkFocusInitial (click)="onNoClick()">No Thanks</button>
+    <button mat-button  >Update Variable</button>
+    <!-- <p>{{this.createTermForm.value.symbolConstraints | json}}</p>
+    <p>{{this.createTermForm.value.coefficientConstraints | json}}</p> -->
+</div>
+
+<!-- (click)="createVariable()" -->
+<!-- (click)="onNoClick()" -->
+<!-- [disabled]="!createTermForm.valid" -->
